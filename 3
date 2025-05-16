@@ -1,0 +1,58 @@
+tasks = []
+def print_menu
+  puts "\n📝 --- МЕНЮ СПИСКУ СПРАВ ---"
+  puts "1. ➕ Додати задачу"
+  puts "2. 📋 Показати всі задачі"
+  puts "3. 🗑 Видалити задачу"
+  puts "4. 🚪 Вийти"
+  print "👉 Оберіть опцію (1-4): "
+end
+
+loop do
+  print_menu
+  choice = gets.chomp.to_i
+
+  case choice
+  when 1
+    print "✏️ Введіть нову задачу: "
+    task = gets.chomp.strip
+    if task.empty?
+      puts "⚠️ Задача не може бути порожньою!"
+    else
+      tasks << task
+      puts "✅ Задачу додано!"
+    end
+
+  when 2
+    puts "\n📋 Ваші задачі:"
+    if tasks.empty?
+      puts "📭 Список порожній."
+    else
+      tasks.each_with_index { |task, index| puts "#{index + 1}. #{task}" }
+    end
+
+  when 3
+    if tasks.empty?
+      puts "❌ Немає задач для видалення."
+    else
+      puts "\n🗑 Виберіть номер задачі для видалення:"
+      tasks.each_with_index { |task, index| puts "#{index + 1}. #{task}" }
+      print "🧮 Введіть номер задачі: "
+      index = gets.chomp.to_i - 1
+
+      if index.between?(0, tasks.length - 1)
+        removed = tasks.delete_at(index)
+        puts "🗑 Задачу '#{removed}' видалено!"
+      else
+        puts "⚠️ Неправильний номер. Спробуйте ще раз."
+      end
+    end
+
+  when 4
+    puts "👋 До зустрічі! Програму завершено."
+    break
+
+  else
+    puts "⚠️ Невідома команда. Оберіть від 1 до 4."
+  end
+end
