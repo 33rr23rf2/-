@@ -1,0 +1,27 @@
+require 'json'
+
+file = File.read('users.json')
+users = JSON.parse(file)
+
+total_age = 0
+
+users.each do |user|
+  name = user["ім'я"].strip
+  age = user["вік"]
+  total_age += age
+  puts "Name: #{name}, Age: #{age}"
+end
+
+if users.any?
+  average_age = total_age.to_f / users.size
+  puts "Average Age: #{average_age.round(2)}"
+end
+
+
+
+
+users.json
+[
+  { "ім'я" : " Аліса " , "вік" : 30 },
+  { "ім'я" : " Боб " , "вік" : 25 }
+]
