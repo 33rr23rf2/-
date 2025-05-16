@@ -1,0 +1,17 @@
+def pig_latin(sentence)
+  sentence.split.map do |word|
+    punctuation = word.match(/[\.\,\!\?]$/) ? word[-1] : ''
+    clean_word = punctuation.empty? ? word : word[0..-2]
+
+    if clean_word.length > 1
+      new_word = clean_word[1..] + clean_word[0] + 'ay'
+    else
+      new_word = clean_word + 'ay'
+    end
+
+    new_word + punctuation
+  end.join(' ')
+end
+
+puts pig_latin("Привіт, світе!")        
+puts pig_latin("Я люблю програмування на Rubi!")  
